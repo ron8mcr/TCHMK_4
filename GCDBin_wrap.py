@@ -4,7 +4,8 @@ import bigInt
 import algs
 
 def main():
-	print "Binary Euclid's algorithm for computing the greatest common divisor (GCD)"
+	print "Binary Euclid's algorithm for computing the greatest common divisor ( GCD(A, B) )"
+
 	print "Enter A:",
 	A = bigInt.bigInt(raw_input())
 	print "Enter B:",

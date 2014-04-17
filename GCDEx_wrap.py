@@ -4,7 +4,7 @@ import bigInt
 import algs
 
 def main():
-	print "Extended Euclid's algorithm for computing the greatest common divisor (GCD)"
+	print "Extended Euclid's algorithm for computing the greatest common divisor ( GCD(A, B) )"
 	print "Enter A:",
 	A = bigInt.bigInt(raw_input())
 	print "Enter B:",
@@ -16,10 +16,10 @@ def main():
 	
 	if A > B:
 		GCD, X, Y = algs.GCDEx(A, B)
-		print "GCD (", A, ",", B, ") =", GCD, "=", X, "*", A, "+", Y, "*", B  
 	else:
 		GCD, Y, X = algs.GCDEx(B, A)
-		print "GCD (", A, ",", B, ") =", GCD, "=", X, "*", A, "+", Y, "*", B  
+		
+	print "GCD (", A, ",", B, ") =", GCD, "=", X, "*", A, "+", Y, "*", B  
 	
 if __name__ == "__main__":
 	main()
