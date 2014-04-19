@@ -127,3 +127,28 @@ def ChinRemTheorem(R, A):
 		x = (x + R[i] * Mi * MiInv) % M
 		
 	return x
+	
+def GarnersAlg(R, A):
+	"Решение системы линейных сравнений по алгоритму Гарнера"
+	# инициализируем массив inverses, inverses[j,i] = aj^(-1) mod ai
+	
+	inverses = []
+	for i in range(len(A)):
+    		inverses.append([bigInt.bigInt(0)] * len(A))
+    	
+    	for i in range (len(A)):
+    		for j in range (i):
+    			isOK, invArr = LinCon (A[j], bigInt.bigInt(1), A[i]) # нахождение обратного для A[i]
+			inverses[j][i] = invArr[0]
+	
+	# подсчитываем коэффициенты по алгоритму Гарнера
+	x = [bigInt.bigInt(0)] * len(A)
+	for i in range (len(A)):
+		x[i] = R[i]
+    		for j in range (i):
+			x[i] = inverses[j][i] * (x[i] - x[j])
+			x[i] = x[i] % A[i];
+			if x[i] < 0:
+				x[i] += A[i]
+	
+	return x

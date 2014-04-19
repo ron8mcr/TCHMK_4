@@ -5,15 +5,15 @@ import bigInt
 import algs
 
 def main():
-	print "Chinese remainder theorem"
+	print "Garner's algorithm"
 	print ""
 	print "X = R1 (mod A1)"
 	print "X = R2 (mod A2)"
 	print ". . . . . . . ."
 	print "X = Rn (mod An)"
-	print "X (mod A1 * ... * A2) - ?\n"
+	print "X = x1 + x2 * a1 + ... + xn * a1 * ... * a(n-1) - ?"
 	print "Input: n, Ri, Ai (i = 1 .. n)"
-	print "Output: X\n"
+	print "Output: X, xi\n"
 	
 	print "Enter n:",
 	n = int (input())
@@ -55,6 +55,18 @@ def main():
 	for i in range (n):
 		print "X =", R[i], "mod", A[i]
 	
-	print "\nX =", algs.ChinRemTheorem(R, A)
+	print ""
+	x = algs.GarnersAlg(R, A) # получаем массив коэффициентов xi
+	coefAi = bigInt.bigInt(1) # a1 * a2 * ... a(i-1)
+	res = bigInt.bigInt(0)    # X = x1 * a1 + ...	
+	print "X =",
+	for i in range (len(x)):
+		res = res + x[i] * coefAi
+		print x[i], "*", coefAi,
+		if i != n - 1:
+			print "+",
+		coefAi *= A[i]
+	print "=", res
+		
 if __name__ == "__main__":
 	main()

@@ -5,6 +5,7 @@ import algs
 
 def main():
 	print "Exponentiation modulo (a^b mod m)"
+	print ""
 	print "Enter base (a):",
 	A = bigInt.bigInt(raw_input())
 	print "Enter power (b):",

@@ -5,6 +5,7 @@ import algs
 
 def main():
 	print "Euclid's algorithm for computing the greatest common divisor ( GCD(A, B) )"
+	print ""
 	print "Enter A:",
 	A = bigInt.bigInt(raw_input())
 	print "Enter B:",

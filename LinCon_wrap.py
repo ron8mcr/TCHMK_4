@@ -6,6 +6,7 @@ import algs
 
 def main():
 	print "Linear congruences (ax = b mod m)"
+	print ""
 	print "Enter a:",
 	A = bigInt.bigInt(raw_input())
 	print "Enter b:",
