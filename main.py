@@ -9,6 +9,7 @@ import ChineseRemTheorem_wrap
 import GarnersAlg_wrap
 import RhoPollard_wrap
 import LegendreSymbol_wrap
+import JacobiSymbol_wrap
 
 print "Welcome!"
 print "Select the menu item:"
@@ -22,6 +23,7 @@ print "6 - Chinese remainder theorem"
 print "7 - Garner's algorithm"
 print "8 - Pollard's rho algorithm for logarithms (a^x = b mod m)"
 print "9 - Legendre symbol ( L(a, p) )"
+print "10 - Jacobi symbol ( J(a, p) )"
 print ""
 print "Select:",
 
@@ -54,3 +56,6 @@ elif choose == 8:
 	
 elif choose == 9:
 	LegendreSymbol_wrap.main()
+	
+elif choose == 10:
+	JacobiSymbol_wrap.main()

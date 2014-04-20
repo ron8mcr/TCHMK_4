@@ -5,17 +5,17 @@ import bigInt
 import algs
 
 def main():
-	print "Legendre symbol ( L(a, p) )"
+	print "Jacobi symbol ( J(a, p) )"
 	print ""
-	print "Input: a, p (prime)"
-	print "Output: L(a, p)\n"
+	print "Input: a, p"
+	print "Output: J(a, p)\n"
 	
 	print "Enter a:",
 	a = bigInt.bigInt(raw_input())
 	print "Enter p:",
 	p = bigInt.bigInt(raw_input())
 	
-	print "\nL(", a, ",", p, ") =", algs.LegSym(a, p)
+	print "\nJ(", a, ",", p, ") =", algs.JacobiSym(a, p)
 	
 if __name__ == "__main__":
 	main()

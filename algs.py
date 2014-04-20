@@ -155,8 +155,7 @@ def GarnersAlg(R, A):
 	
  
 # Для алгоритма Ро-полларда
-# Примеры с методичек (Шитов, Маховенко, en.wikipedia) решает правильно
-# но другие - как-то странно
+# алгоритм с http://en.wikipedia.org/wiki/Pollard%27s_rho_algorithm_for_logarithms
 def new_xab(x, a, b, n, N, alpha, beta):
 	c = x % 3
 	if c == 0:
@@ -186,7 +185,6 @@ def RhoPollard(alpha, beta, N):
 		x, a, b = new_xab( x, a, b, n, N, alpha, beta )
 		X, A, B = new_xab( X, A, B, n, N, alpha, beta )
 		X, A, B = new_xab( X, A, B, n, N, alpha, beta )
-		#print i, x, a, b, X, A, B
 		i += 1
 		if( x == X and i > 2):
 			if (B - b) == 0:
@@ -199,7 +197,6 @@ def RhoPollard(alpha, beta, N):
 				Aa = a - A
 				
 			isSolved, res = LinCon(Bb, Aa, n)
-			#print "B - b =", Bb, "A - a =", Aa
 			if not isSolved:
 				return None
 			if res == -1:
@@ -225,12 +222,39 @@ def LegSym (a, p):
 		return 1
 		
 	if a % 2 == 0:
-		if p % 8 == 0:
+		if ((p*p - 1) / 8) % 2 == 0:
 			return LegSym (a/2, p)
 		else:
 			return -1 * LegSym (a/2, p)
 			
-	if ((a - 1) * (p - 1) / 4) % 2 == 0:
-		return LegSym(p, a)
+	if a % 4 == 3 and p % 4 == 3: # !((a - 1)/2 * (p - 1)/2 ) % 2 == 0
+		return -1 *LegSym(p, a)
 	else:
-		return -1 * LegSym (p, a)		
+		return LegSym (p, a)	
+		
+def JacobiSym (a, p):
+	if GCD (a, p) != 1:
+		return 0
+		
+	r = bigInt.bigInt(1)
+	
+	if a < 0:
+		a = -a
+		if p % 4 == 3:
+			r = -r
+	
+	while (a != 0):
+		t = bigInt.bigInt(0)
+		while a % 2 == 0:
+			t += 1
+			a = a / 2
+		if t % 2 == 1:
+			if p % 8 == 3 or p % 8 == 5:
+				r = -r
+	
+		if a % 4 == 3 and p % 4 == 3:
+			r = -r
+		c = a
+		a = p % c
+		p = c
+	return r
