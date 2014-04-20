@@ -7,6 +7,7 @@ import PowMod_wrap
 import LinCon_wrap
 import ChineseRemTheorem_wrap
 import GarnersAlg_wrap
+import RhoPollard_wrap
 
 print "Welcome!"
 print "Select the menu item:"
@@ -18,6 +19,7 @@ print "4 - Exponentiation modulo (a^b mod m)"
 print "5 - Linear congruences (ax = b mod m)"
 print "6 - Chinese remainder theorem"
 print "7 - Garner's algorithm"
+print "8 - Pollard's rho algorithm for logarithms (a^x = b mod m)"
 print ""
 print "Select:",
 
@@ -44,3 +46,6 @@ elif choose == 6:
 
 elif choose == 7:
 	GarnersAlg_wrap.main()
+	
+elif choose == 8:
+	RhoPollard_wrap.main()

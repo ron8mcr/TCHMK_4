@@ -89,7 +89,7 @@ def LinCon (a, b, m):
 	if b % d != 0:
 		return False, 0
 	
-	if (a == 0 or b % m == 0) and (b == 0 or a % m == 0):
+	if (a == 0 and b % m == 0) or (b == 0 and a % m == 0):
 		return True, -1
 	
 	# находим одно из решений, используя расширенный алгоритм Евклида
@@ -152,3 +152,53 @@ def GarnersAlg(R, A):
 				x[i] += A[i]
 	
 	return x
+	
+ 
+def new_xab(x, a, b, n, N, alpha, beta):
+	c = x % 3
+	if c == 0:
+		x = (x*x) % N
+		a = (a*2) % n 
+		b = (b*2) % n
+	elif c == 1:
+		x = x*alpha % N
+		a = (a+1) % n
+	elif c == 2:
+		x = x*beta % N
+		b = (b+1) % n
+
+	return x, a, b 
+
+def RhoPollard(alpha, beta, N):
+	n = N - 1
+	x = bigInt.bigInt(1)
+	a = bigInt.bigInt(0)
+	b = bigInt.bigInt(0)
+	X = x
+	A = a
+	B = b
+	
+	i = bigInt.bigInt(1)
+	while (i < n):
+		x, a, b = new_xab( x, a, b, n, N, alpha, beta )
+		X, A, B = new_xab( X, A, B, n, N, alpha, beta )
+		X, A, B = new_xab( X, A, B, n, N, alpha, beta )
+		print i, x, a, b, X, A, B
+		i += 1
+		if( x == X and i > 2):
+			if (B - b) == 0:
+				return None
+			Bb = B - b
+			Aa = A - a
+			if Bb < 0:
+				Bb = b - B
+			if Aa < 0:
+				Aa = a - A
+				
+			isSolved, res = LinCon(Bb, Aa, n)
+			print "B - b =", Bb, "A - a =", Aa
+			if not isSolved:
+				return None
+			if res == -1:
+				return None
+			return res[0]
