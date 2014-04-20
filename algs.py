@@ -154,6 +154,9 @@ def GarnersAlg(R, A):
 	return x
 	
  
+# Для алгоритма Ро-полларда
+# Примеры с методичек (Шитов, Маховенко, en.wikipedia) решает правильно
+# но другие - как-то странно
 def new_xab(x, a, b, n, N, alpha, beta):
 	c = x % 3
 	if c == 0:
@@ -183,7 +186,7 @@ def RhoPollard(alpha, beta, N):
 		x, a, b = new_xab( x, a, b, n, N, alpha, beta )
 		X, A, B = new_xab( X, A, B, n, N, alpha, beta )
 		X, A, B = new_xab( X, A, B, n, N, alpha, beta )
-		print i, x, a, b, X, A, B
+		#print i, x, a, b, X, A, B
 		i += 1
 		if( x == X and i > 2):
 			if (B - b) == 0:
@@ -196,9 +199,38 @@ def RhoPollard(alpha, beta, N):
 				Aa = a - A
 				
 			isSolved, res = LinCon(Bb, Aa, n)
-			print "B - b =", Bb, "A - a =", Aa
+			#print "B - b =", Bb, "A - a =", Aa
 			if not isSolved:
 				return None
 			if res == -1:
 				return None
 			return res[0]
+			
+def LegSym (a, p):
+	if a == -1:
+		if ((p - 1) / 2) % 2 == 0:
+			return 1
+		else:
+			return -1	
+			
+	if a == 1:
+		return 1
+			
+	if a < 0:
+		return LegSym(-1, p) * LegSym (-a, p)
+	
+	a %= p
+	
+	if a == 0:
+		return 1
+		
+	if a % 2 == 0:
+		if p % 8 == 0:
+			return LegSym (a/2, p)
+		else:
+			return -1 * LegSym (a/2, p)
+			
+	if ((a - 1) * (p - 1) / 4) % 2 == 0:
+		return LegSym(p, a)
+	else:
+		return -1 * LegSym (p, a)		
