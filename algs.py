@@ -242,7 +242,6 @@ def JacobiSym (a, p):
 		a = -a
 		if p % 4 == 3:
 			r = -r
-	
 	while (a != 0):
 		t = bigInt.bigInt(0)
 		while a % 2 == 0:
@@ -277,10 +276,11 @@ def isPrime (n):
 		
 def SqrtPrime (a, p):
 	"Нахождение квадратного корня по модулю простого числа по алгоритму Тонелли-Шенкса"
+	if a == 0:
+		return False, 0
 	# проверка, есть ли вообще решение
 	if JacobiSym(a, p) == -1:
 		return False, 0
-		
 	# находим b такое что (b,p)=-1 
 	b = bigInt.bigInt(2)
 	while (JacobiSym(b, p) == 1):
@@ -292,7 +292,6 @@ def SqrtPrime (a, p):
 	while (t % 2 == 0):
 		t /= 2
 		s += 1
-	
 # по методичке Шитова	
 #	# Вычисляем a2 = a^(-1)mod p - обратный элемент в кольце Zp
 #	isOK, invArr = LinCon (a, bigInt.bigInt(1), p)
@@ -320,10 +319,12 @@ def SqrtPrime (a, p):
 #		N2 = (N2 * PowMod(N1, e, p)) % p
 #		print "i =",i, "b =", b, "c =", c, "d =", d, "j =", j, "N2 =", N2
 #		i += 1
-#	res = (a1 * N2) % p
-#	return True, [res, -res]
+#	r = (a1 * N2) % p
+#	res = [r, p - r]
+#	res.sort()
+#	return True, res
 
-	# Вычисляем invA a^(-1)mod p - обратный элемент в кольце Zp
+	# Вычисляем invA = a^(-1)mod p - обратный элемент в кольце Zp
 	isOK, invArr = LinCon (a, bigInt.bigInt(1), p)
 	invA = invArr[0]
 	
@@ -340,4 +341,6 @@ def SqrtPrime (a, p):
 			r = (r * c) % p
 		c = (c * c) % p
 		i += 1
-	return True, [r, -r]
+	res = [r, p - r]
+	res.sort()
+	return True, res

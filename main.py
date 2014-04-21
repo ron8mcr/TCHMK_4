@@ -11,6 +11,7 @@ import RhoPollard_wrap
 import LegendreSymbol_wrap
 import JacobiSymbol_wrap
 import SqrtPrime_wrap
+import QuadConPrime_wrap
 
 print "Welcome!"
 print "Select the menu item:"
@@ -26,6 +27,7 @@ print "8 - Pollard's rho algorithm for logarithms (a^x = b mod m)"
 print "9 - Legendre symbol ( L(a, p) )"
 print "10 - Jacobi symbol ( J(a, p) )"
 print "11 - Square root modulo a prime ( x^2 = a mod p (p - prime) )"
+print "12 - Quadratic congruences modulo a prime ( ax^2 + bx + c = 0 mod p )"
 print ""
 print "Select:",
 
@@ -64,3 +66,6 @@ elif choose == 10:
 	
 elif choose == 11:
 	SqrtPrime_wrap.main()
+	
+elif choose == 12:
+	QuadConPrime_wrap.main()	

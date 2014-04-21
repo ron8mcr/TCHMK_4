@@ -16,8 +16,9 @@ def main():
 	b = bigInt.bigInt(raw_input())
 	print "Enter m:",
 	m = bigInt.bigInt(raw_input())
-	# нужна проверка m на простоту
-	# нужна проверка на порядок числа a по модулю m
+	if not algs.isPrime(m):
+		print "m must be prime!"
+		return
 	
 	print ""
 	print a, "^ x =", b, "mod", m
