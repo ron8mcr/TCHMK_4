@@ -10,6 +10,7 @@ import GarnersAlg_wrap
 import RhoPollard_wrap
 import LegendreSymbol_wrap
 import JacobiSymbol_wrap
+import SqrtPrime_wrap
 
 print "Welcome!"
 print "Select the menu item:"
@@ -24,6 +25,7 @@ print "7 - Garner's algorithm"
 print "8 - Pollard's rho algorithm for logarithms (a^x = b mod m)"
 print "9 - Legendre symbol ( L(a, p) )"
 print "10 - Jacobi symbol ( J(a, p) )"
+print "11 - Square root modulo a prime ( x^2 = a mod p (p - prime) )"
 print ""
 print "Select:",
 
@@ -59,3 +61,6 @@ elif choose == 9:
 	
 elif choose == 10:
 	JacobiSymbol_wrap.main()
+	
+elif choose == 11:
+	SqrtPrime_wrap.main()

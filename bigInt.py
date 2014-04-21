@@ -75,7 +75,6 @@ class bigInt(_object):
     __setattr__ = lambda self, name, value: _swig_setattr(self, bigInt, name, value)
     __swig_getmethods__ = {}
     __getattr__ = lambda self, name: _swig_getattr(self, bigInt, name)
-    __repr__ = _swig_repr
     def __init__(self, *args): 
         this = _bigInt.new_bigInt(*args)
         try: self.this.append(this)
@@ -106,6 +105,7 @@ class bigInt(_object):
     def __eq__(self, *args): return _bigInt.bigInt___eq__(self, *args)
     def __ne__(self, *args): return _bigInt.bigInt___ne__(self, *args)
     def __str__(self): return _bigInt.bigInt___str__(self)
+    def __repr__(self): return _bigInt.bigInt___repr__(self)
 bigInt_swigregister = _bigInt.bigInt_swigregister
 bigInt_swigregister(bigInt)
 

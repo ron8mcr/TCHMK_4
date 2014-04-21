@@ -29,9 +29,7 @@ def main():
 			print "x - any"
 		else:	# решений может быть несколько
 			x.sort()
-			print "x =",
-			for i in range(len(x)):
-				print x[i], 
+			print "x =", x
 	else:
 		print "No solution"
 	

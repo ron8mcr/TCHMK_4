@@ -258,3 +258,86 @@ def JacobiSym (a, p):
 		a = p % c
 		p = c
 	return r
+	
+def TrialDiv (n):
+	if n < 0:
+		n = -n
+	i = 2
+	while i <= (n+1)/2:
+		if n % i == 0:
+			return i
+		i += 1
+	return 1
+	
+def isPrime (n):
+	if TrialDiv(n) == 1:
+		return True
+	else:
+		return False
+		
+def SqrtPrime (a, p):
+	"Нахождение квадратного корня по модулю простого числа по алгоритму Тонелли-Шенкса"
+	# проверка, есть ли вообще решение
+	if JacobiSym(a, p) == -1:
+		return False, 0
+		
+	# находим b такое что (b,p)=-1 
+	b = bigInt.bigInt(2)
+	while (JacobiSym(b, p) == 1):
+		b += 1
+		
+	# Представляем p-1 в виде p-1 = 2^s*t, где t - нечетное
+	t = p - 1
+	s = bigInt.bigInt(0)
+	while (t % 2 == 0):
+		t /= 2
+		s += 1
+	
+# по методичке Шитова	
+#	# Вычисляем a2 = a^(-1)mod p - обратный элемент в кольце Zp
+#	isOK, invArr = LinCon (a, bigInt.bigInt(1), p)
+#	a2 = invArr[0]
+#	
+#	N1 = PowMod (b, t, p)
+#	a1 = PowMod (a, (t + 1)/2, p)
+#	N2 = bigInt.bigInt(1)
+#	j = 0
+#	
+#	i = bigInt.bigInt(0)
+#	while i < s - 1:
+#		b = (a1 * N2) % p
+#		c = (a2 * b * b) % p
+#		
+#		e = PowMod(bigInt.bigInt(2), s - 2 - i, p)
+#		d = PowMod (c, e, p)
+#		
+#		if d == 1:
+#			j = 0
+#		if d == p - 1:
+#			j = 1
+#		e = PowMod(bigInt.bigInt(2), i, p)
+#		e *= j
+#		N2 = (N2 * PowMod(N1, e, p)) % p
+#		print "i =",i, "b =", b, "c =", c, "d =", d, "j =", j, "N2 =", N2
+#		i += 1
+#	res = (a1 * N2) % p
+#	return True, [res, -res]
+
+	# Вычисляем invA a^(-1)mod p - обратный элемент в кольце Zp
+	isOK, invArr = LinCon (a, bigInt.bigInt(1), p)
+	invA = invArr[0]
+	
+	c = PowMod (b, t, p)
+	r = PowMod (a, (t + 1)/2, p)
+	
+	i = bigInt.bigInt(1)
+	while i < s:
+		# вычисляем d=[(r^2*invA)^(2^(s-i-1))][mod p]
+		e = PowMod(bigInt.bigInt(2), s - i - 1, p)
+		d = PowMod(r*r * invA, e, p)
+		print "d =", d
+		if d == p - 1:
+			r = (r * c) % p
+		c = (c * c) % p
+		i += 1
+	return True, [r, -r]
